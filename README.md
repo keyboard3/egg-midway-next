@@ -1,5 +1,7 @@
 # egg-midway-next
-同胞兄弟 [next-daruk](https://github.com/keyboard3/next-daruk) daruk 轻量级的 web 框架
+[next-daruk](https://github.com/keyboard3/next-daruk) daruk 轻量级的 web 框架
+
+[next-nest](https://github.com/keyboard3/koa-midway-next) nest 强大的 web 框架，生态完备
 
 分身 [koa-midway-next](https://github.com/keyboard3/koa-midway-next)
 
@@ -38,3 +40,6 @@ export async function getServerSideProps(context: NextPageContext) {
   }
 }
 ```
+
+在线访问页面 https://keyboard3.com/egg-midway-next/
+在线访问api https://keyboard3.com/egg-midway-next/api/get_user

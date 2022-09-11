@@ -1,14 +1,15 @@
 import { IMiddleware, NextFunction } from '@midwayjs/core';
 import { Middleware } from '@midwayjs/decorator';
+import { Context } from 'egg';
 import { parse } from "url";
 import next from "next";
-import { Context } from 'egg';
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = 'localhost'
 const port = 3000
+const basePath = process.env.BASE_PATH || "";
 
-const app = next({ dev, hostname, port })
+const app = next({ dev, hostname, port, conf: { basePath } })
 app.prepare();
 const nextRequestHandler = app.getRequestHandler();
 
