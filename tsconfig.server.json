@@ -17,6 +17,7 @@
     "typeRoots": ["./typings", "./node_modules/@types"],
     "jsx": "preserve",
     "incremental": true,
+    "rootDir": "src",
     "outDir": "dist",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -27,5 +28,5 @@
     "isolatedModules": true
   },
   "exclude": ["dist", "node_modules", "test"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "scr/**/*.ts", "scr/**/*.tsx"]
 }
