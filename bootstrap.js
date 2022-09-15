@@ -1,2 +1,2 @@
 const { Bootstrap } = require('@midwayjs/bootstrap');
-Bootstrap.run();
+Bootstrap.run().catch(err => console.error(err));
