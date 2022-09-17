@@ -9,7 +9,7 @@ const hostname = 'localhost'
 const port = 3000
 const basePath = process.env.BASE_PATH || "";
 
-const app = next({ dev, hostname, port, conf: { basePath } })
+const app = next({ dev, hostname, port, dir: "../render", conf: { basePath } })
 app.prepare();
 const nextRequestHandler = app.getRequestHandler();
 

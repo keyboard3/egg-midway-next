@@ -4,6 +4,7 @@ yarn-error.log
 node_modules/
 coverage/
 dist/
+*/dist/
 .idea/
 run/
 .DS_Store
@@ -12,3 +13,5 @@ run/
 .tsbuildinfo
 .tsbuildinfo.*
 .next
+*/.next
+*/next-env.d.ts

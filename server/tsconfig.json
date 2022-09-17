@@ -1,12 +1,14 @@
 {
-  "compileOnSave": true,
   "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
     "target": "es2018",
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "inlineSourceMap": true,
+    "baseUrl": "./",
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "stripInternal": true,
@@ -14,18 +16,20 @@
     "pretty": true,
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./typings", "./node_modules/@types"],
-    "jsx": "preserve",
     "incremental": true,
-    "outDir": "dist",
-    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "strict": false,
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "typeRoots": ["server/typings", "./node_modules/@types"]
   },
   "exclude": ["dist", "node_modules", "test"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }

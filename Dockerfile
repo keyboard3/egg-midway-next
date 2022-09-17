@@ -1,24 +1,27 @@
 # This stage installs our modules
-FROM mhart/alpine-node:16 AS deps
+FROM mhart/alpine-node:14 AS deps
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY server/package.json ./server/package.json
+COPY render/package.json ./render/package.json
+RUN yarn --frozen-lockfile
 
-FROM mhart/alpine-node:16 AS serverdeps
+FROM mhart/alpine-node:14 AS serverdeps
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN NODE_ENV=production yarn install --frozen-lockfile
+COPY server/package.json ./server/package.json
+COPY render/package.json ./render/package.json
+RUN NODE_ENV=production yarn --frozen-lockfile
 
 FROM deps AS builder
 COPY . .
 RUN yarn build
 
 FROM serverdeps AS runner
-WORKDIR /app
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/bootstrap.js .
+COPY --from=builder /app/render/.next ./render/.next
+COPY --from=builder /app/render/public ./render/public
+COPY --from=builder /app/server/dist ./server/dist
+COPY --from=builder /app/server/bootstrap.js ./server/
 
 ENV NODE_ENV=production
 ENV BASE_PATH=/egg-midway-next

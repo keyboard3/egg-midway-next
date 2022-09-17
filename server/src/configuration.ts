@@ -3,7 +3,7 @@ import { ILifeCycle } from '@midwayjs/core';
 import { Application } from 'egg';
 import { join } from 'path';
 import * as egg from '@midwayjs/web';
-import { NextMiddleware } from './middleware/next.middleware';
+import { NextMiddleware } from './middleware/next-bridge.middleware';
 
 @Configuration({
   imports: [egg],
