@@ -7,8 +7,11 @@
     "@midwayjs/bootstrap": "^3.0.0",
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/decorator": "^3.0.0",
+    "@midwayjs/typegoose": "^3.5.1",
     "@midwayjs/web": "^3.0.0",
-    "egg": "^2.0.0"
+    "@typegoose/typegoose": "^9.12.0",
+    "egg": "^2.0.0",
+    "mongoose": "^6.6.1"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.0.0",

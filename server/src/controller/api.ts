@@ -1,6 +1,7 @@
-import { Inject, Controller, Query, Get } from '@midwayjs/decorator';
+import { Inject, Controller, Get, Post, Body } from '@midwayjs/decorator';
 import { Context } from 'egg';
-import { IGetUserResponse } from '../interface';
+import { User } from 'src/entity/user';
+import { IGetUsersResponse, ICreateUserResponse } from '../interface';
 import { UserService } from '../service/user';
 
 @Controller('/api')
@@ -11,9 +12,15 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Get('/get_user')
-  async getUser(@Query('uid') uid: string): Promise<IGetUserResponse> {
-    const user = await this.userService.getUser({ uid });
-    return { success: true, message: 'OK', data: user };
+  @Post('/user')
+  async createUser(@Body() createUserDTO: typeof User): Promise<ICreateUserResponse> {
+    const user = await this.userService.createUser(createUserDTO);
+    return { success: true, message: 'OK', data: user as any };
+  }
+
+  @Get('/users')
+  async getUsers(): Promise<IGetUsersResponse> {
+    const users = await this.userService.getAll();
+    return { success: true, message: 'OK', data: users as any };
   }
 }

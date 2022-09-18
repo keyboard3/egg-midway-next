@@ -42,4 +42,3 @@ export async function getServerSideProps(context: NextPageContext) {
 ```
 
 在线访问页面 https://keyboard3.com/egg-midway-next/
-在线访问api https://keyboard3.com/egg-midway-next/api/get_user

@@ -1,12 +1,16 @@
 /**
  * @description User-Service parameters
  */
-export interface IUserOptions {
-  uid: string;
-}
 
-export interface IGetUserResponse {
+import { User } from "./entity/user";
+
+export interface ICreateUserResponse {
   success: boolean;
   message: string;
-  data: IUserOptions;
+  data: typeof User;
+}
+export interface IGetUsersResponse {
+  success: boolean;
+  message: string;
+  data: (typeof User)[];
 }
