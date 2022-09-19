@@ -1,7 +1,7 @@
 import { Provide } from '@midwayjs/decorator';
 import { InjectEntityModel } from '@midwayjs/typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
-import { User } from 'src/entity/user';
+import { User } from '../entity/user';
 
 @Provide()
 export class UserService {

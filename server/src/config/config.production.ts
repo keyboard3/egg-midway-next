@@ -1,5 +1,5 @@
 import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
-import { User } from 'src/entity/user';
+import { User } from '../entity/user';
 
 export default (appInfo: MidwayAppInfo) => {
   return {

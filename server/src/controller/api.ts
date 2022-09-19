@@ -1,6 +1,6 @@
 import { Inject, Controller, Get, Post, Body } from '@midwayjs/decorator';
 import { Context } from 'egg';
-import { User } from 'src/entity/user';
+import { User } from '../entity/user';
 import { IGetUsersResponse, ICreateUserResponse } from '../interface';
 import { UserService } from '../service/user';
 
