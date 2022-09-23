@@ -5,6 +5,7 @@ import { join } from 'path';
 import * as egg from '@midwayjs/web';
 import * as typegoose from '@midwayjs/typegoose';
 import { NextMiddleware } from './middleware/next-bridge.middleware';
+import { getKoaApi } from './bridge';
 
 @Configuration({
   imports: [egg, typegoose],
@@ -16,6 +17,9 @@ export class ContainerLifeCycle implements ILifeCycle {
 
   async onReady() {
     this.app.useMiddleware([NextMiddleware]);
-    (global as any).koaApp = this.app;
+    (global as any).serverFetch = getKoaApi.bind(
+      this,
+      this.app,
+    );
   }
 }

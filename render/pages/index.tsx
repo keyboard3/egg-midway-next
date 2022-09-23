@@ -1,7 +1,6 @@
 import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { getApi } from "../req-bridge"
 import styles from '../styles/Home.module.css'
 const Home: NextPage = ({ users }: any) => {
   return (
@@ -45,8 +44,8 @@ const Home: NextPage = ({ users }: any) => {
 export default Home
 
 export async function getServerSideProps(context: NextPageContext) {
-  const users: any = await getApi('users');
+  const response = await global.serverFetch('http://127.0.0.1/api/users');
   return {
-    props: { users }, // will be passed to the page component as props
+    props: { users: response.json().data }, // will be passed to the page component as props
   }
 }

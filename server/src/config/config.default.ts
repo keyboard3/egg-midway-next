@@ -1,4 +1,5 @@
 import { MidwayConfig, MidwayAppInfo } from '@midwayjs/core';
+import { User } from '../entity/user';
 
 export default (appInfo: MidwayAppInfo) => {
   return {
@@ -10,5 +11,14 @@ export default (appInfo: MidwayAppInfo) => {
     // security: {
     //   csrf: false,
     // },
+    mongoose: {
+      dataSource: {
+        default: {
+          uri: 'mongodb://test:test1234@150.158.12.147:30017/db_test',
+          // 关联实体
+          entities: [ User ]
+        }
+      }
+    }
   } as MidwayConfig;
 };
