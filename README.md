@@ -1,20 +1,12 @@
 # egg-midway-next
-[next-daruk](https://github.com/keyboard3/next-daruk) daruk 轻量级的 web 框架
+采用 monorepo 管理 server 的 Midway.js 代码 和 render 的 Next.js 代码。两个仓库代码独立，不耦合。
 
-[next-nest](https://github.com/keyboard3/koa-midway-next) nest 强大的 web 框架，生态完备
+由 server 的 Midway.js 负责启动，Midway.js 启动时会有根路由中间件分发，Next.js 的聚合接口通过 global.serverFetch 接口访问 Midway.js api
 
-分身 [koa-midway-next](https://github.com/keyboard3/koa-midway-next)
+在线预览 https://keyboard3.com/egg-midway-next/
 
-阿里的 [midway](https://www.midwayjs.org/docs/intro) 重量级的 web 框架，生态完备。[Next.js](https://nextjs.org/docs)强大的 ssr 前端框架。强强联合
-
-[midway](https://www.midwayjs.org/docs/intro) 的写法, 给个 controller 的例子
-/src/controller
+/server/src/controller/api.ts
 ```typescript
-import { Inject, Controller, Query, Get } from '@midwayjs/decorator';
-import { Context } from 'egg';
-import { IGetUserResponse } from '../interface';
-import { UserService } from '../service/user';
-
 @Controller('/api')
 export class APIController {
   @Inject()
@@ -23,22 +15,26 @@ export class APIController {
   @Inject()
   userService: UserService;
 
-  @Get('/get_user')
-  async getUser(@Query('uid') uid: string): Promise<IGetUserResponse> {
-    const user = await this.userService.getUser({ uid });
-    return { success: true, message: 'OK', data: user };
+  @Post('/user')
+  async createUser(@Body() createUserDTO: typeof User): Promise<ICreateUserResponse> {
+    const user = await this.userService.createUser(createUserDTO);
+    return { success: true, message: 'OK', data: user as any };
+  }
+
+  @Get('/users')
+  async getUsers(): Promise<IGetUsersResponse> {
+    const users = await this.userService.getAll();
+    return { success: true, message: 'OK', data: users as any };
   }
 }
 ```
 
-/pages/index.tsx
+/render/pages/index.tsx
 ```typescript
 export async function getServerSideProps(context: NextPageContext) {
-  const user: any = await getApi('get_user?uid=111');
+  const response = await global.serverFetch('http://127.0.0.1/api/users');
   return {
-    props: { name: user.username }, // will be passed to the page component as props
+    props: { users: response.json().data }, // will be passed to the page component as props
   }
 }
 ```
-
-在线访问页面 https://keyboard3.com/egg-midway-next/
